@@ -18,7 +18,9 @@
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "lucide-react": "0.468.0",
-    "ical.js": "2.2.1"
+    "ical.js": "2.2.1",
+    "fast-xml-parser": "5.2.5"
+    ,"@mvrx/wbxml": "0.1.0"
   },
   "devDependencies": {
     "@types/react": "19.1.9",

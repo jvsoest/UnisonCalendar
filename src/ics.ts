@@ -12,3 +12,5 @@ export function parseIcs(text:string,calendarId:string):CalendarEvent[]{
   }
   return result;
 }
+
+export function calendarColorFromIcs(text:string){const match=text.match(/(?:^|\r?\n)(?:X-WR-CALCOLOR|COLOR):([^\r\n;]+)/i);const value=match?.[1]?.trim();return value&&/^#[0-9a-f]{6}$/i.test(value)?value:undefined}

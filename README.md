@@ -53,12 +53,12 @@ De macOS-build is voorlopig niet met een Apple Developer ID ondertekend en de Wi
 
 Open het tandwiel rechtsboven. De app ondersteunt:
 
-- **CalDAV:** server-URL, gebruikersnaam en wachtwoord/app-wachtwoord. De app valideert de gegevens met een WebDAV `PROPFIND`.
-- **Google Calendar:** OAuth 2.0 Authorization Code met PKCE via de standaardbrowser.
-- **Microsoft Exchange:** Microsoft identity platform OAuth 2.0 met PKCE en de `EAS.AccessAsUser.All` scope.
+- **CalDAV:** server-URL, gebruikersnaam en wachtwoord/app-wachtwoord. De app ontdekt agenda-collecties via WebDAV `PROPFIND`, haalt afspraken op met `calendar-query REPORT` en bewaart ze offline.
+- **Google Calendar:** OAuth 2.0 Authorization Code met PKCE, agenda-discovery, eventdownload en remote create/update via de Google Calendar API.
+- **Microsoft Exchange:** Microsoft identity platform OAuth 2.0 met PKCE en de `EAS.AccessAsUser.All` scope, gevolgd door EAS 14.1 Provision, FolderSync en Calendar Sync/Add/Change.
 
 Google en Microsoft vereisen een eigen publieke desktopclient-id. Registreer een desktop/native app, activeer de Calendar API of EAS-permissie en sta een localhost loopback redirect toe. Unison kiest bij iedere login een vrije lokale poort (`http://localhost:<poort>/oauth/callback`). Er is geen client secret nodig of toegestaan voor deze publieke desktopflow.
 
 Accountmetadata staat in het Electron user-data-profiel. OAuth refresh tokens en CalDAV-wachtwoorden worden apart versleuteld met Electron `safeStorage`, dat op macOS Keychain en op ondersteunde Windows/Linux-systemen de native OS-beveiliging gebruikt.
 
-De login- en veilige-opslaglaag is geïmplementeerd. Agenda-discovery, ophalen/pushen, iCalendar-parsing en EAS WBXML-synchronisatie moeten nog op de bestaande provider-adapters worden aangesloten voordat accounts hun echte afspraken tonen.
+CalDAV, Google Calendar en Exchange ActiveSync ondersteunen lezen, een lokale offline cache en remote create/update. Wijzigingen die offline worden gemaakt blijven in de lokale outbox en worden bij de volgende verbinding verstuurd. ICS-abonnementen zijn per definitie alleen-lezen en worden daarom niet als doelagenda getoond bij het maken van afspraken.
