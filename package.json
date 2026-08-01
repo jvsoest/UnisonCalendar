@@ -62,6 +62,7 @@
     },
     "linux": {
       "category": "Office",
+      "maintainer": "Johan van Soest <unison-calendar@johanvansoest.nl>",
       "target": [
         { "target": "AppImage", "arch": ["x64"] },
         { "target": "deb", "arch": ["x64"] }
